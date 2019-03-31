@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "771186078281",
+    "firebase_url": "https://greentrack-1553112611104.firebaseio.com",
+    "project_id": "greentrack-1553112611104",
+    "storage_bucket": "greentrack-1553112611104.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:771186078281:android:7ffc4a7bf557dbc4",
+        "android_client_info": {
+          "package_name": "lk.janiru.greentrack"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "771186078281-9schi5nldge59ouqd7pe7o6g4isd9pmd.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "lk.janiru.greentrack",
+            "certificate_hash": "c1077147fc266ae54c2f131822c40ec6e0515067"
+          }
+        },
+        {
+          "client_id": "771186078281-g1343ojtd9nvc4vk2ueroq263ch0a4cd.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDiE7tTAdu3YuFH80dbVfUvKzUoF5jp660"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "771186078281-g1343ojtd9nvc4vk2ueroq263ch0a4cd.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
