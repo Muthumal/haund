@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context=".main.ui.MainActivity"
+    tools:context="lk.janiru.greentrack.main.ui.MainActivity"
     tools:showIn="@layout/app_bar_main">
 
     <fragment xmlns:android="http://schemas.android.com/apk/res/android"
@@ -15,14 +15,39 @@
         android:name="com.google.android.gms.maps.SupportMapFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".main.ui.MainActivity" />
+        tools:context="lk.janiru.greentrack.main.ui.MainActivity">
+
+
+        <Button
+            android:id="@+id/btnLocationSt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|center"
+            android:text="I'm Here"
+            android:textColor="@color/grey_100"
+
+            android:textSize="18sp"
+
+            android:padding="20dp"
+            android:background = "@drawable/roundbutton"
+
+            android:layout_marginLeft="90dp"
+            android:layout_marginRight="90dp"
+
+            android:layout_marginBottom="20dp"/>
+
+
+    </fragment>
+
+
+
+
 
     <ImageView
         android:id="@+id/imgLocationPinUp"
-        android:layout_width="70dp"
-        android:layout_height="70dp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:layout_centerInParent="true"
-
-        android:src="@drawable/ios_marker" />
+        android:src="@drawable/student_marker" />
 
 </RelativeLayout>

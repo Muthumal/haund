@@ -25,12 +25,17 @@ import static android.icu.text.MessagePattern.ArgType.SELECT;
  */
 @Dao
 public interface UserDao {
+
     @Insert
     void insert(User user);
+
+    @Query("SELECT * FROM User WHERE userId=:id" )
+    User getById(String id);
 
     @Query("SELECT * FROM User WHERE id=:id" )
     User getById(int id);
 
     @Update
     void update(User user);
+
 }

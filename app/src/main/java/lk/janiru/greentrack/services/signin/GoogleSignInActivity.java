@@ -1,5 +1,6 @@
 package lk.janiru.greentrack.services.signin;
 
+
 /**
  *
  * Project Name : ${PROJECT}
@@ -12,6 +13,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
@@ -28,7 +30,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
 
 
-import java.sql.SQLOutput;
+import java.util.ArrayList;
 
 import androidx.annotation.NonNull;
 import lk.janiru.greentrack.BaseActivity;
@@ -46,17 +48,19 @@ public class GoogleSignInActivity extends BaseActivity implements
     private static final int RC_SIGN_IN = 9001;
 
     // [START declare_auth]
-    private FirebaseAuth mAuth;
+    public static FirebaseAuth mAuth;
     // [END declare_auth]
 
-    private GoogleSignInClient mGoogleSignInClient;
+    public static GoogleSignInClient mGoogleSignInClient;
     private TextView mStatusTextView;
     private TextView mDetailTextView;
+    public static ArrayList<String> allowed_emails;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(lk.janiru.greentrack.R.layout.activity_google);
+
 
         // Views
         mStatusTextView = findViewById(lk.janiru.greentrack.R.id.status);
@@ -80,6 +84,9 @@ public class GoogleSignInActivity extends BaseActivity implements
         // [START initialize_auth]
         // Initialize Firebase Auth
         mAuth = FirebaseAuth.getInstance();
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        MainActivity.FIREBASE_USER = currentUser;
+        updateUI(MainActivity.FIREBASE_USER);
         // [END initialize_auth]
     }
 
@@ -88,9 +95,11 @@ public class GoogleSignInActivity extends BaseActivity implements
     public void onStart() {
         super.onStart();
         // Check if user is signed in (non-null) and update UI accordingly.
-        FirebaseUser currentUser = mAuth.getCurrentUser();
-        MainActivity.FIREBASE_USER = currentUser;
-        updateUI(MainActivity.FIREBASE_USER);
+
+        if(MainActivity.FIREBASE_USER!=null){
+            startActivity(new Intent(this,MainActivity.class));
+            finish();
+        }
     }
     // [END on_start_check_user]
 
@@ -107,10 +116,7 @@ public class GoogleSignInActivity extends BaseActivity implements
                 GoogleSignInAccount account = task.getResult(ApiException.class);
                 firebaseAuthWithGoogle(account);
 
-                Intent intent = new Intent(this, MainActivity.class);
-                startActivity(intent);
-
-
+                MainActivity.FIREBASE_USER = mAuth.getCurrentUser();
             } catch (ApiException e) {
                 // Google Sign In failed, update UI appropriately
                 Log.w(TAG, "Google sign in failed", e);
@@ -138,7 +144,14 @@ public class GoogleSignInActivity extends BaseActivity implements
                             // Sign in success, update UI with the signed-in user's information
                             Log.d(TAG, "signInWithCredential:success");
                             FirebaseUser user = mAuth.getCurrentUser();
-                            updateUI(user);
+                            if(!allowed_emails.contains(user.getEmail())){
+                                Toast.makeText(GoogleSignInActivity.this,"You don't have permission to use this app",Toast.LENGTH_LONG).show();
+                                signOut();
+                            }else {
+                                MainActivity.FIREBASE_USER = user;
+                            }updateUI(user);
+                            startActivity(new Intent(GoogleSignInActivity.this,MainActivity.class));
+                            finish();
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "signInWithCredential:failure", task.getException());
@@ -161,7 +174,7 @@ public class GoogleSignInActivity extends BaseActivity implements
     }
     // [END signin]
 
-    private void signOut() {
+    public void signOut() {
         // Firebase sign out
         mAuth.signOut();
 
@@ -202,12 +215,6 @@ public class GoogleSignInActivity extends BaseActivity implements
             mDetailTextView.setText(getString(lk.janiru.greentrack.R.string.firebase_status_fmt, user.getUid()));
 
             findViewById(lk.janiru.greentrack.R.id.signInButton).setVisibility(View.GONE);
-            findViewById(lk.janiru.greentrack.R.id.signOutAndDisconnect).setVisibility(View.VISIBLE);
-        } else {
-            mStatusTextView.setText(lk.janiru.greentrack.R.string.signed_out);
-            mDetailTextView.setText(null);
-
-            findViewById(lk.janiru.greentrack.R.id.signInButton).setVisibility(View.VISIBLE);
             findViewById(lk.janiru.greentrack.R.id.signOutAndDisconnect).setVisibility(View.GONE);
         }
     }

@@ -21,14 +21,14 @@ import androidx.room.PrimaryKey;
 @Entity(tableName = "User")
 public class User {
 
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
     private int id;
+
     private String userId;
     private String name;
     private String location;
+    private boolean isAlive;
 
-    public User() {
-    }
 
     public User(String userId, String name, String location) {
         this.userId = userId;
@@ -42,6 +42,12 @@ public class User {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public String getUserId() {return userId;}
+
+    public void setUserId(String userId){
+        this.userId = userId;
     }
 
     public String getName() {
@@ -60,9 +66,16 @@ public class User {
         this.location = location;
     }
 
+    public boolean isAlive() {
+        return isAlive;
+    }
 
-    public String getUserId() {return userId;}
+    public void setAlive(boolean alive) {
+        this.isAlive = alive;
+    }
 
-    public User setUserId(String userId) {this.userId = userId;return this;}
+
+
+
 
 }

@@ -101,4 +101,30 @@
     <string name="title_activity_base">BaseActivity</string>
 
     <string name="web_client_id">771186078281-g1343ojtd9nvc4vk2ueroq263ch0a4cd.apps.googleusercontent.com</string>
+
+
+    <string name="msg_subscribed">Subscribed to weather topic</string>
+    <string name="msg_token_fmt" translatable="false">InstanceID Token: %s</string>
+
+    <string name="default_notification_channel_id" translatable="false">fcm_default_channel</string>
+    <!--
+        This is the name that users will see when interacting with this channel.
+        It should describe the category of notifications that will be sent through this channel
+     -->
+    <string name="default_notification_channel_name" translatable="true">Weather</string>
+    <string name="msg_subscribe_failed">Failed to subscribe to weather topic</string>
+    <string name="fcm_message">FCM Message</string>
+
+
+    <string name="transport_id" translatable="false">greentrack-1553112611104</string>
+    <string name="firebase_path" translatable="false">https://greentrack-1553112611104.firebaseio.com</string>
+
+    <string name="notification_text">Your Bus Has Arrived</string>
+    <string name="notification_title">KNOCK KNOCK</string>
+
+    <string name="title_activity_fullscreen">FullscreenActivity</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+
+
 </resources>

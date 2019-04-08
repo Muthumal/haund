@@ -19,7 +19,7 @@ import androidx.sqlite.db.SupportSQLiteDatabase;
 import lk.janiru.greentrack.db.dao.UserDao;
 import lk.janiru.greentrack.db.entiity.User;
 
-@Database(entities = {User.class},version = 3,exportSchema = false)
+@Database(entities = {User.class},version =5 ,exportSchema = false)
 public abstract class AppDatabase extends RoomDatabase {
     public abstract UserDao userDao();
     private static AppDatabase INSTANCE;
@@ -32,6 +32,19 @@ public abstract class AppDatabase extends RoomDatabase {
                             AppDatabase.class, "database")
                             .allowMainThreadQueries()
                             .fallbackToDestructiveMigration()
+//                            .addCallback(new Callback() {
+//                                @Override
+//                                public void onCreate(@NonNull SupportSQLiteDatabase db) {
+//                                    super.onCreate(db);
+//                                    Executors.newSingleThreadScheduledExecutor().execute(new Runnable() {
+//                                        @Override
+//                                        public void run() {
+//                                            AppDatabase database = getDatabase(context);
+//                                            //database.userDao().insert(new User(null,null,null));
+//                                        }
+//                                    });
+//                                }
+//                            })
                             .build();
                 }
             }

@@ -30,15 +30,20 @@ public class UserRepository {
         userDao=APP_DATABASE_INSTANCE.userDao();
     }
 
-    void insert(User user){
+    public void insert(User user){
         userDao.insert(user);
     }
 
-    void update(User user){
+    public void update(User user){
+        user.setId(1);
         userDao.update(user);
     }
 
-    void getById(int Id){
-        userDao.getById(Id);
+    public User getById(String Id){
+        return userDao.getById(Id);
+    }
+
+    public User getUser(){
+        return userDao.getById(1);
     }
 }
